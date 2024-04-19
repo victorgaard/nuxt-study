@@ -2,6 +2,9 @@
     const routes = [{
         href: '/',
         label: 'Nuxt store'
+    },{
+        href: '/products',
+        label: 'Products'
     }]
 </script>
 
