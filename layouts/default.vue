@@ -1,7 +1,7 @@
 <template>
-    <div className="flex flex-col bg-slate-950 text-white min-h-screen">
+    <div class="flex flex-col bg-slate-950 text-white min-h-screen">
         <Navbar />
-        <section className="p-6">
+        <section class="p-6">
             <slot />
         </section>
     </div>
