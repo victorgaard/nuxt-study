@@ -3,13 +3,13 @@ const { data: products, pending, error, refresh } = useFetch<Product[]>('https:/
 </script>
 
 <template>
-    <div v-if="error" class="p-4">There was an issue fetching the products.
+    <div v-if="error">There was an issue fetching the products.
         <button @:click="refresh">Please try again</button>
     </div>
 
-    <div v-else-if="pending" class="p-4">Loading...</div>
+    <div v-else-if="pending">Loading...</div>
 
-    <div v-else class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
+    <div v-else class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         <ProductCard 
             v-for="product in products" 
             :id="product.id" 
