@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import type { Product } from '~/types/global';
+
 const { params } = useRoute()
-const { data: product, pending, error, refresh } = useFetch<Product>(`https://fakestoreapi.com/products/${params.id}`)
+const { data: product, pending, error, refresh } = await useLazyFetch<Product>(`https://fakestoreapi.com/products/${params.id}`)
 </script>
 
 <template>

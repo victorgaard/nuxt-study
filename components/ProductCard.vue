@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Product } from '../utils/types'
+import type { Product } from '../types/global'
 defineProps<Product>()
 </script>
 

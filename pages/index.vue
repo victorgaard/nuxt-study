@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const { data: products, pending, error, refresh } = useFetch<Product[]>('https://fakestoreapi.com/products/')
+import type { Product } from '~/types/global';
+const { data: products, pending, error, refresh } = await useLazyFetch<Product[]>('https://fakestoreapi.com/products/')
 </script>
 
 <template>
