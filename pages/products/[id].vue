@@ -4,7 +4,7 @@ const { data: product, pending, error, refresh } = useFetch<Product>(`https://fa
 </script>
 
 <template>
-    <div v-if="error">There was an issue fetching the products.
+    <div v-if="error">There was an issue fetching the products. 
         <button @:click="refresh">Please try again</button>
     </div>
 
