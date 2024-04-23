@@ -2,11 +2,21 @@
 import type { Product } from '~/types/global';
 
 const { params } = useRoute()
-const { data: product, pending, error, refresh } = await useLazyFetch<Product>(`https://fakestoreapi.com/products/${params.id}`)
+
+useSeoMeta({
+    title: `Nuxt study e-commerce - Product ${params.id}`,
+    ogTitle: 'Nuxt study e-commerce',
+    description: 'Browse our fine selection of articles.',
+    ogDescription: 'Browse our fine selection of articles.',
+    ogImage: '',
+    twitterCard: 'summary_large_image'
+})
+
+const { data: product, pending, error, refresh } = useFetch<Product>(`https://fakestoreapi.com/products/${params.id}`)
 </script>
 
 <template>
-    <div v-if="error">There was an issue fetching the products. 
+    <div v-if="error">There was an issue fetching the product. 
         <button @:click="refresh">Please try again</button>
     </div>
 
