@@ -2,19 +2,20 @@
 import type { Product } from '~/types/global';
 const { params } = useRoute()
 
-useSeoMeta({
-    title: `Nuxt study e-commerce - Product ${params.id}`,
-    ogTitle: 'Nuxt study e-commerce',
-    description: 'Browse our fine selection of articles.',
-    ogDescription: 'Browse our fine selection of articles.',
-    ogImage: '',
-    twitterCard: 'summary_large_image'
-})
 
 const { data: product, pending, error, refresh } = useFetch<Product>(`https://fakestoreapi.com/products/${params.id}`)
 
 const currentProductName = useState('currentProductName')
 currentProductName.value = computed(() => product.value?.title)
+
+useSeoMeta({
+    title: `Nuxt study e-commerce - ${currentProductName.value}`,
+    ogTitle: `Nuxt study e-commerce - ${currentProductName.value}`,
+    description: `Purchase ${currentProductName.value} at the best price here.`,
+    ogDescription: `Purchase ${currentProductName.value} at the best price here.`,
+    ogImage: '',
+    twitterCard: 'summary_large_image'
+})
 </script>
 
 <template>
