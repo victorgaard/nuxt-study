@@ -1,5 +1,4 @@
 <script setup lang="ts">
-    import { ShoppingCartIcon } from '@heroicons/vue/24/outline'
     const route = computed(() => useRouter().currentRoute.value.params.id)
     const currentProductName = useState('currentProductName', () => '')
 </script>
@@ -13,8 +12,6 @@
                 <NuxtLink :to="`/products/${route}`" class="line-clamp-1" activeClass="text-emerald-400"> {{ currentProductName }}</NuxtLink>
             </div>
         </div>
-        <button class="bg-emerald-700 flex items-center gap-2 text-white py-1.5 px-3.5 rounded-lg">
-            <ShoppingCartIcon class="h-5 w-5 opacity-60" />Cart
-        </button>
+        <Cart />
     </nav>
 </template>

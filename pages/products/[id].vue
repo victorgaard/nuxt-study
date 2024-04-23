@@ -2,7 +2,6 @@
 import type { Product } from '~/types/global';
 const { params } = useRoute()
 
-
 const { data: product, pending, error, refresh } = useFetch<Product>(`https://fakestoreapi.com/products/${params.id}`)
 
 const currentProductName = useState('currentProductName')
