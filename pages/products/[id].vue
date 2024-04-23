@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Product } from '~/types/global';
-
 const { params } = useRoute()
 
 useSeoMeta({
@@ -13,6 +12,9 @@ useSeoMeta({
 })
 
 const { data: product, pending, error, refresh } = useFetch<Product>(`https://fakestoreapi.com/products/${params.id}`)
+
+const currentProductName = useState('currentProductName')
+currentProductName.value = computed(() => product.value?.title)
 </script>
 
 <template>
