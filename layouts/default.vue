@@ -10,10 +10,13 @@
 </script>
 
 <template>
-    <div class="flex flex-col bg-slate-900 text-white min-h-screen">
-        <Navbar />
-        <section class="px-8">
-            <slot />
-        </section>
+    <div class="flex flex-col justify-between bg-slate-950/95 text-white min-h-screen">
+        <div>
+            <Navbar />
+            <section class="px-8">
+                <slot />
+            </section>
+        </div>
+        <Footer />
     </div>
 </template>
