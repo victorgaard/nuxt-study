@@ -1,14 +1,12 @@
-export type ProductRating = {
-    rate: number;
-    counter: number
-}
-
 export type Product = {
     id: number;
-    title: string;
-    price: number;
+    name: string;
     description: string;
-    category: string;
-    image: string;
-    rating: ProductRating
+    price: number;
+    region: string;
+    weight: number;
+    flavor_profile: string[]
+    grind_option: string[]
+    roast_level: number;
+    image_url: string;
 }

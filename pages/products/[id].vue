@@ -1,20 +1,16 @@
 <script setup lang="ts">
-import type { Product } from '~/types/global';
-const { params } = useRoute()
+import useProduct from '~/services/useProduct';
 
-const { data: product, pending, error, refresh } = useFetch<Product>(`https://fakestoreapi.com/products/${params.id}`)
-
-const currentProductName = useState('currentProductName')
-currentProductName.value = computed(() => product.value?.title)
-
-useSeoMeta({
-    title: `Nuxt study e-commerce - ${currentProductName.value}`,
-    ogTitle: `Nuxt study e-commerce - ${currentProductName.value}`,
-    description: `Purchase ${currentProductName.value} at the best price here.`,
-    ogDescription: `Purchase ${currentProductName.value} at the best price here.`,
-    ogImage: '',
-    twitterCard: 'summary_large_image'
+definePageMeta({
+    validate: async (route) => {
+        return typeof route.params.id === 'string' && /^\d+$/.test(route.params.id)
+    }
 })
+
+const { params } = useRoute()
+const { product, pending, error, refresh } = useProduct({ id: params.id })
+const productName = useState('currentProductName')
+productName.value = computed(() => product.value?.name)
 </script>
 
 <template>
