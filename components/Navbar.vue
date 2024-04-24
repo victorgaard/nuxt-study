@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import { store } from '~/store/store'
     const route = computed(() => useRouter().currentRoute.value.params.id)
-</script>
+</script> 
 
 <template>
     <nav class="flex justify-between p-8 gap-4 text-lg font-medium">

@@ -17,10 +17,10 @@ store.updateCurrentProduct(newProduct.value)
 const { name, weight, price, image_url } = store.currentProduct
 
 useSeoMeta({
-    title: () => `${name} ${weight} ${formatCurrency(price)}`,
-    ogTitle: () => `${name} ${weight} ${formatCurrency(price)}`,
-    description: () => `Try now ${name} ${weight} ${formatCurrency(price)}`,
-    ogDescription: () => `Try now ${name} ${weight} ${formatCurrency(price)}`,
+    title: () => `${name} ${formatWeight(weight)} ${formatCurrency(price)}`,
+    ogTitle: () => `${name} ${formatWeight(weight)} ${formatCurrency(price)}`,
+    description: () => `Try now ${name} ${formatWeight(weight)} ${formatCurrency(price)}`,
+    ogDescription: () => `Try now ${name} ${formatWeight(weight)} ${formatCurrency(price)}`,
     ogImage: () => `${image_url}`,
     twitterCard: 'summary_large_image'
 })
