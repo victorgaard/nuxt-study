@@ -1,6 +1,6 @@
 <script setup lang="ts">
     const route = computed(() => useRouter().currentRoute.value.params.id)
-    const currentProductName = useState('currentProductName', () => '')
+    const currentProductName = useState('currentProductName')
 </script>
 
 <template>

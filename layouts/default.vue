@@ -1,7 +1,7 @@
 <script setup lang="ts">
     useSeoMeta({
-        title: 'Nuxt study coffee shop',
-        ogTitle: 'Nuxt study coffee shop',
+        title: 'Nuxt coffee shop',
+        ogTitle: 'Nuxt coffee shop',
         description: 'Browse our fine selection of coffees.',
         ogDescription: 'Browse our fine selection of coffees.',
         ogImage: '',

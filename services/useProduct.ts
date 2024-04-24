@@ -5,6 +5,8 @@ type UseProduct = {
 }
 
 export default function useProduct({ id }: UseProduct) {
-    const { data: product, pending, error, refresh } = useFetch<Product>(`https://fake-coffee-api.vercel.app/api/${id}`)
+    const { data: product, pending, error, refresh } = useFetch<Product[]>(`https://fake-coffee-api.vercel.app/api/${id}`)
+    useState('currentProductName', () => computed(() => product.value?.[0].name))
+    console.log(useState('currentProductName').value)
     return { product, pending, error, refresh }
 }

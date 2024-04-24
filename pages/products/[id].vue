@@ -9,8 +9,6 @@ definePageMeta({
 
 const { params } = useRoute()
 const { product, pending, error, refresh } = useProduct({ id: params.id })
-const productName = useState('currentProductName')
-productName.value = computed(() => product.value?.name)
 </script>
 
 <template>
