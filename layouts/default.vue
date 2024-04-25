@@ -10,7 +10,7 @@
 </script>
 
 <template>
-    <div class="flex flex-col justify-between selection:bg-amber-600 bg-slate-950/95 text-white min-h-screen overflow-clip">
+    <div class="flex flex-col justify-between selection:bg-amber-600 bg-slate-950/95 text-white min-h-dvh overflow-clip">
         <div>
             <Navbar />
             <section class="px-8">

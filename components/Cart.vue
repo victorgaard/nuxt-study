@@ -5,6 +5,8 @@ const cartCount = ref(0)
 
 <template>
     <button class="bg-emerald-700 flex-shrink-0 flex items-center gap-2 text-white py-1.5 px-3.5 rounded-lg">
-        <ShoppingCartIcon class="h-5 w-5 opacity-60" />Cart {{ cartCount }}
+        <ShoppingCartIcon class="h-5 w-5 opacity-60" />Cart <span v-if="cartCount > 0"
+            class="text-sm h-4 w-4 rounded-full bg-white text-emerald-600 flex items-center justify-center">{{ cartCount
+            }}</span>
     </button>
 </template>
