@@ -30,10 +30,22 @@ function handleSearch(event: MouseEvent, searchTerm: string) {
             There are no results for {{ search }}
         </div>
         <div v-else class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-12">
-            <ProductCard v-for="product in filteredProducts" :id="product.id" :name="product.name"
-                :description="product.description" :image_url="product.image_url" :price="product.price"
-                :region="product.region" :flavor_profile="product.flavor_profile" :weight="product.weight"
-                :grind_option="product.grind_option" :roast_level="product.roast_level" :handleSearch="handleSearch" />
+            <ProductCardWrapper v-for="product in filteredProducts" :id="product.id" :name="product.name">
+                <ProductCardImage :name="product.name" :image_url="product.image_url" :price="product.price" />
+                <ProductCardContent>
+                    <ProductCardFlavors>
+                        <Label v-for="flavor in product.flavor_profile" @click="handleSearch($event, flavor)">
+                            {{ flavor }}</Label>
+                    </ProductCardFlavors>
+                    <ProductCardBody>
+                        <ProductCardTitle :name="product.name" :weight="product.weight" />
+                        <ProductCardDescription>{{ product.description }}</ProductCardDescription>
+                        <ProductCardRegion :handle-search="handleSearch" :region="product.region">{{ product.region }}
+                        </ProductCardRegion>
+                    </ProductCardBody>
+                    <ProductCardFooter>{{ formatCurrency(product.price) }}</ProductCardFooter>
+                </ProductCardContent>
+            </ProductCardWrapper>
         </div>
     </div>
 </template>
