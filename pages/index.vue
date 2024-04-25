@@ -21,11 +21,9 @@ function handleSearch(event: MouseEvent, searchTerm: string) {
     <div v-if="error">There was an issue fetching the products.
         <button @:click="refresh">Please try again</button>
     </div>
-
     <div v-else-if="pending">Loading...</div>
-
     <div v-else class="flex flex-col gap-6">
-        <Input v-model="search" placeholder="Search for coffee, location, flavor profile..." id="search" />
+        <Search v-model="search" />
         <div v-if="filteredProducts?.length === 0">
             There are no results for {{ search }}
         </div>
