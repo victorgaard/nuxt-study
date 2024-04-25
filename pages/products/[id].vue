@@ -9,12 +9,8 @@ definePageMeta({
 })
 
 const { params } = useRoute()
-const { product, pending, error, refresh } = await useProduct({ id: params.id })
-
-const newProduct = ref(product.value?.[0])
-store.updateCurrentProduct(newProduct.value)
-
-const { name, weight, price, image_url } = store.currentProduct
+const { pending, error, refresh } = await useProduct({ id: params.id })
+const { id, name, description, weight, region, flavor_profile, price, roast_level, image_url } = store.currentProduct
 
 useSeoMeta({
     title: () => `${name} ${formatWeight(weight)} ${formatCurrency(price)}`,
@@ -24,6 +20,8 @@ useSeoMeta({
     ogImage: () => `${image_url}`,
     twitterCard: 'summary_large_image'
 })
+
+const quantity = ref(1)
 </script>
 
 <template>
@@ -33,7 +31,51 @@ useSeoMeta({
 
     <div v-else-if="pending">Loading...</div>
 
-    <div v-else>
-        {{ JSON.stringify(product) }}
+    <div v-else class="flex justify-center">
+        <div class="grid grid-cols-2 gap-12 max-w-[1180px]">
+            <div
+                class="relative h-[600px] flex items-center justify-center overflow-clip rounded-2xl bg-gradient-to-b from-emerald-700 to-amber-800">
+                <NuxtImg loading="lazy" quality="1" height="2000px" :src="image_url"
+                    :alt="`Background image for ${name}`"
+                    class="absolute inset-0 -top-[90%] h-[2000px] object-cover mix-blend-soft-light opacity-30" />
+                <NuxtImg loading="lazy" :src="image_url" height="600px"
+                    :alt="`Product - ${name} - ${formatCurrency(price)}`"
+                    class="z-10 h-[600px] object-cover scale-120" />
+            </div>
+            <div class="flex flex-col gap-2 justify-between">
+                <div class="flex flex-col gap-8">
+                    <div>
+                        <p class="text-3xl font-medium">{{ name }}</p>
+                        <p>{{ formatCurrency(price) }}</p>
+                    </div>
+                    <div>
+                        <p>description</p>
+                        <p class="text-slate-400">{{ description }}</p>
+                    </div>
+                    <div>
+                        <p>region</p>
+                        <p>{{ region }}</p>
+                    </div>
+                    <div>
+                        <p>flavor profile</p>
+                        <p>{{ flavor_profile }}</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div
+                        class="flex items-center gap-2 w-28 justify-between border border-slate-600 h-full rounded-lg overflow-clip">
+                        <button :disabled="quantity <= 1" @:click="quantity--"
+                            class="px-3.5 h-full bg-slate-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all">-</button>
+                        <p>{{ quantity }}</p>
+                        <button :disabled="quantity >= 9" @:click="quantity++"
+                            class="px-3.5 h-full bg-slate-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all">+</button>
+                    </div>
+                    <button
+                        class="flex-1 bg-amber-700 flex items-center justify-center gap-2 text-white py-3 px-3.5 rounded-lg">Add
+                        to cart <span class="text-white opacity-50">•</span> {{ formatCurrency(price * quantity)
+                        }}</button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>

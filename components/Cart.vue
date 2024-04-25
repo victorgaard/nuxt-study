@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ShoppingCartIcon } from '@heroicons/vue/24/outline'
-const cartCount = useState('cartCount', () => 0)
+const cartCount = ref(0)
 </script>
 
 <template>
