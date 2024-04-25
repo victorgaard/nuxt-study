@@ -8,13 +8,13 @@ const query = route.query.search?.toString() || ''
 const search = ref(query)
 watch(search, () => router.push({ query: search.value ? { search: search.value } : {} }))
 
+const { products, pending, error, refresh } = await useProducts()
+const filteredProducts = computed(() => filterProducts({ productsArray: products.value, searchTerm: search.value }))
+
 function handleSearch(event: MouseEvent, searchTerm: string) {
     event.preventDefault();
     search.value = searchTerm
 }
-
-const { products, pending, error, refresh } = await useProducts()
-const filteredProducts = computed(() => filterProducts({ productsArray: products.value, searchTerm: search.value }))
 </script>
 
 <template>

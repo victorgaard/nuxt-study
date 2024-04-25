@@ -11,7 +11,7 @@ defineProps<ProductCardProps>()
 
 <template>
     <NuxtLink :alt="`Purchase ${name}`" :to="`/products/${id}`"
-        class="flex flex-col group focus-within:outline-emerald-500 outline-none outline-offset-8 focus-within:rounded-xl">
+        class="flex flex-col group active:outline-none focus:outline-emerald-500 outline-none outline-offset-8 focus:rounded-xl">
         <div
             className="relative h-48 flex items-center justify-center overflow-clip rounded-2xl border border-slate-800 group-hover:border-slate-700/70 transition-colors">
             <NuxtImg loading="lazy" width="320" height="240" quality="1" :src="image_url"
