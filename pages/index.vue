@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import useProducts from '~/services/useProducts';
+
 const router = useRouter()
 const route = useRoute()
 

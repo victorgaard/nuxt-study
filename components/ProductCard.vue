@@ -10,7 +10,8 @@ defineProps<ProductCardProps>()
 </script>
 
 <template>
-    <NuxtLink :alt="`Purchase ${name}`" :to="`/products/${id}`" class="flex flex-col group">
+    <NuxtLink :alt="`Purchase ${name}`" :to="`/products/${id}`"
+        class="flex flex-col group focus-within:outline-emerald-500 outline-none outline-offset-8 focus-within:rounded-xl">
         <div
             className="relative h-48 flex items-center justify-center overflow-clip rounded-2xl border border-slate-800 group-hover:border-slate-700/70 transition-colors">
             <NuxtImg loading="lazy" width="320" height="240" quality="1" :src="image_url"
@@ -22,16 +23,15 @@ defineProps<ProductCardProps>()
         </div>
         <div class="pt-2 flex flex-1 flex-col gap-1.5 justify-between">
             <div class="flex items-center flex-wrap gap-1.5">
-                <button v-for="flavor in flavor_profile" @click="handleSearch($event, flavor)"
-                    class="hover:bg-emerald-400 text-xs hover:text-slate-900 text-slate-300 rounded-lg bg-slate-800 px-2 py-0.5">
-                    {{ flavor }}</button>
+                <Label v-for="flavor in flavor_profile" @click="handleSearch($event, flavor)">
+                    {{ flavor }}</Label>
             </div>
             <div class="flex flex-col gap-1.5">
                 <p class="font-medium">{{ name }} <span class="text-slate-400">•</span> {{ formatWeight(weight) }} </p>
                 <p class="text-sm text-slate-400 line-clamp-2">{{ description }}</p>
-                <button @click="handleSearch($event, region)" class="text-sm text-slate-400 hover:text-emerald-400 flex items-center gap-1">
+                <ButtonText @click="handleSearch($event, region)">
                     <MapPinIcon class="h-3.5 w-3.5" /> {{ region }}
-                </button>
+                </ButtonText>
             </div>
             <div class="flex items-center gap-4">
                 <p class="font-medium">{{ formatCurrency(price) }} </p>
