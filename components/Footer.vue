@@ -6,8 +6,9 @@
                 Victor</NuxtLink>.
         </p>
         <NuxtLink alt="Go to GitHub repo" to="https://github.com/victorgaard/nuxt-study"
-            class="text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-2" target="_blank">
-            <GithubIcon /><span class="hidden">Repo</span>
+            class="text-emerald-400 group translate-x-[106px] hover:translate-x-0 hover:text-emerald-300 transition-all flex items-center gap-2"
+            target="_blank">
+            <GithubIcon /><span class="opacity-0 group-hover:opacity-100 transition-opacity">Check the repo</span>
         </NuxtLink>
     </div>
 </template>
