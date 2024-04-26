@@ -94,15 +94,11 @@ async function addToCart() {
                             class="px-3.5 hover:bg-slate-700 h-full bg-slate-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all">+</button>
                     </div>
                     <button :disabled="isAddingToCart" @:click="addToCart"
-                        class="flex-1 disabled:opacity-50 bg-amber-700 hover:bg-amber-800 transition-all flex items-center justify-center gap-2 text-white py-3 px-3.5 rounded-lg">
-                        <template v-if="isAddingToCart">
-                            Adding {{ quantity }} items to the cart
-                        </template>
-                        <template v-else>
-                            <ShoppingCartIcon class="h-5 w-5 opacity-50" /> Add
-                            to cart <span class="text-white opacity-50">•</span> {{ formatCurrency(price * quantity)
-                            }}
-                        </template>
+                        class="flex-1 disabled:opacity-50 active:bg-amber-700 bg-amber-700 disabled:hover:bg-amber-700 disabled:cursor-not-allowed hover:bg-amber-800 transition-all flex items-center justify-center gap-2 text-white py-3 px-3.5 rounded-lg">
+                        <LoadingSpinner v-if="isAddingToCart" />
+                        <ShoppingCartIcon v-else class="h-5 w-5 opacity-50" />
+                        Add to cart <span class="text-white opacity-50">•</span> {{ formatCurrency(price * quantity)
+                        }}
                     </button>
                 </div>
             </div>

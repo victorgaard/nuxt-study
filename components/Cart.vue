@@ -59,14 +59,13 @@ function calculateTotalPrice() {
                                         <button @:click="cartStore.incrementProductQuantity(item.id, 1)"
                                             class="px-3.5 hover:bg-slate-600 h-full bg-slate-700 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all">+</button>
                                     </div>
-                                    <button class="flex items-center gap-2 text-sm mr-auto"
+                                    <button class="flex items-center gap-2 text-slate-300 text-sm mr-auto"
                                         @:click="cartStore.removeFromCart(item.id)">
                                         <TrashIcon class="h-4 w-4 opacity-50" /> Remove from cart
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="h-[1px] bg-slate-700 -mx-4" />
                     </div>
                     <div class="h-[1px] bg-slate-700 -mx-4" />
                     <button class="flex justify-between mt-4 py-3 px-6 bg-emerald-600 rounded"><span>Checkout</span><span>Total:

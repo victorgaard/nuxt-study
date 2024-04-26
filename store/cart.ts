@@ -34,8 +34,6 @@ export const cartStore = reactive<CartStore>({
 	},
 	decrementProductQuantity(productId: number) {
 		const productIndex = this.getProductIndex(productId);
-		if (this.cart[productIndex].quantity === 1)
-			return this.removeFromCart(productId);
 		this.cart[productIndex].quantity--;
 	},
 	addToCart(cartProduct: CartProductType) {
