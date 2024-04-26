@@ -5,7 +5,7 @@ import {
   PopoverRoot,
   PopoverTrigger,
 } from "radix-vue";
-import { ShoppingCartIcon, TrashIcon } from "@heroicons/vue/24/outline";
+import { CreditCardIcon, ShoppingCartIcon } from "@heroicons/vue/24/outline";
 import { cartStore } from "~/store/cart";
 const { cart } = cartStore;
 const isCartOpen = ref(false);
@@ -14,6 +14,11 @@ watch(cart, () => (isCartOpen.value = true));
 
 function calculateTotalPrice() {
   return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+}
+
+async function removeFromCart(productId: number) {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  cartStore.removeFromCart(productId);
 }
 </script>
 
@@ -24,7 +29,7 @@ function calculateTotalPrice() {
   >
     <PopoverTrigger as-child>
       <button
-        class="bg-emerald-700 flex-shrink-0 flex items-center gap-2 text-white py-1.5 px-3.5 rounded-lg"
+        class="bg-emerald-700 hover:bg-emerald-600 active:bg-emerald-700 transition-colors flex-shrink-0 flex items-center gap-2 text-white py-1.5 px-3.5 rounded-lg outline-none focus:outline-emerald-500 focus:rounded-lg"
       >
         <ShoppingCartIcon class="h-5 w-5 opacity-60" />Cart
         <span
@@ -38,7 +43,7 @@ function calculateTotalPrice() {
       <PopoverContent
         align="end"
         :side-offset="8"
-        class="bg-slate-800 flex flex-col gap-4 border z-20 border-slate-700 p-4 rounded-lg text-white shadow-2xl"
+        class="bg-slate-800 opacity-0 animate-fade-in flex flex-col gap-4 border z-20 border-slate-700 p-4 rounded-lg text-white shadow-2xl"
       >
         <div>
           <p class="text-xl font-medium">Shopping cart</p>
@@ -71,46 +76,44 @@ function calculateTotalPrice() {
                   </p>
                   <p class="text-sm text-slate-300">
                     {{ item.quantity }}x {{ formatCurrency(item.price) }}
-                    {{
-                      item.quantity > 1
-                        ? `(${formatCurrency(item.price * item.quantity)})`
-                        : ""
-                    }}
+                    <span v-if="item.quantity > 1"
+                      >({{ formatCurrency(item.price * item.quantity) }})</span
+                    >
                   </p>
                   <div
-                    class="flex items-center text-sm h-8 gap-2 my-2 w-28 justify-between border border-slate-600 rounded-lg overflow-clip"
+                    class="flex items-center text-sm h-8 gap-2 my-2 w-28 justify-between border border-slate-600 rounded-lg"
                   >
                     <button
                       :disabled="item.quantity <= 1"
-                      class="px-3.5 hover:bg-slate-600 h-full bg-slate-700 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                      class="px-3.5 hover:bg-slate-600 h-full bg-slate-700 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all outline-none focus:outline-emerald-500 rounded-l-md"
                       @:click="cartStore.decrementProductQuantity(item.id)"
                     >
                       -
                     </button>
                     <p>{{ item.quantity }}</p>
                     <button
-                      class="px-3.5 hover:bg-slate-600 h-full bg-slate-700 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                      class="px-3.5 hover:bg-slate-600 h-full bg-slate-700 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all outline-none focus:outline-emerald-500 rounded-r-md"
                       @:click="cartStore.incrementProductQuantity(item.id, 1)"
                     >
                       +
                     </button>
                   </div>
-                  <button
-                    class="flex items-center gap-2 text-slate-300 text-sm mr-auto"
-                    @:click="cartStore.removeFromCart(item.id)"
-                  >
-                    <TrashIcon class="h-4 w-4 opacity-50" /> Remove from cart
-                  </button>
+                  <CartRemoveFromCart
+                    :productId="item.id"
+                    :removeFromCart="removeFromCart"
+                  />
                 </div>
               </div>
             </div>
           </div>
           <div class="h-[1px] bg-slate-700 -mx-4" />
           <button
-            class="flex justify-between mt-4 py-3 px-6 bg-emerald-600 rounded"
+            class="flex justify-between mt-4 py-3 px-6 bg-emerald-700 hover:bg-emerald-600 active:bg-emerald-700 transition-colors rounded outline-none focus:outline-emerald-500"
           >
-            <span>Checkout</span
-            ><span>Total: {{ formatCurrency(calculateTotalPrice()) }}</span>
+            <p class="flex items-center gap-2">
+              <CreditCardIcon class="h-6 w-6 opacity-50" /> Checkout
+            </p>
+            <span>Total: {{ formatCurrency(calculateTotalPrice()) }}</span>
           </button>
         </div>
       </PopoverContent>

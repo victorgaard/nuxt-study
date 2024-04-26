@@ -127,18 +127,18 @@ async function addToCart() {
         </div>
         <div class="flex items-center gap-2">
           <div
-            class="flex items-center gap-2 w-28 justify-between border border-slate-700 h-full rounded-lg overflow-clip"
+            class="flex items-center gap-2 w-28 justify-between border border-slate-700 h-full rounded-lg"
           >
             <button
               :disabled="quantity <= 1"
-              class="px-3.5 hover:bg-slate-700 h-full bg-slate-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              class="px-3.5 hover:bg-slate-700 h-full bg-slate-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all rounded-l-md outline-none focus:outline-emerald-500"
               @:click="quantity--"
             >
               -
             </button>
             <p>{{ quantity }}</p>
             <button
-              class="px-3.5 hover:bg-slate-700 h-full bg-slate-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              class="px-3.5 hover:bg-slate-700 h-full bg-slate-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all rounded-r-md outline-none focus:outline-emerald-500"
               @:click="quantity++"
             >
               +
@@ -146,10 +146,10 @@ async function addToCart() {
           </div>
           <button
             :disabled="isAddingToCart"
-            class="flex-1 disabled:opacity-50 active:bg-amber-700 bg-amber-700 disabled:hover:bg-amber-700 disabled:cursor-not-allowed hover:bg-amber-800 transition-all flex items-center justify-center gap-2 text-white py-3 px-3.5 rounded-lg"
+            class="flex-1 disabled:opacity-50 active:bg-amber-700 bg-amber-700 disabled:hover:bg-amber-700 disabled:cursor-not-allowed hover:bg-amber-800 transition-all flex items-center justify-center gap-2 text-white py-3 px-3.5 rounded-lg outline-none focus:outline-amber-500"
             @:click="addToCart"
           >
-            <LoadingSpinner v-if="isAddingToCart" />
+            <LoadingSpinner v-if="isAddingToCart" class="h-5 w-5" />
             <ShoppingCartIcon v-else class="h-5 w-5 opacity-50" />
             Add to cart <span class="text-white opacity-50">•</span>
             {{ formatCurrency(price * quantity) }}
