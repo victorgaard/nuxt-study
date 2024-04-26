@@ -23,17 +23,19 @@ function handleSearch(event: MouseEvent, searchTerm: string) {
     </div>
     <div v-else-if="pending">Loading...</div>
     <div v-else class="flex flex-col gap-6">
-        <Search v-model="search" />
+        <SearchInputField v-model="search" />
         <div v-if="filteredProducts?.length === 0">
             There are no results for {{ search }}
         </div>
         <div v-else class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-12">
-            <ProductCardWrapper v-for="product in filteredProducts" :id="product.id" :name="product.name">
+            <ProductCardWrapper v-for="product in filteredProducts" :key="product.id" :id="product.id"
+                :name="product.name">
                 <ProductCardImage :name="product.name" :image_url="product.image_url" :price="product.price" />
                 <ProductCardContent>
                     <ProductCardFlavors>
-                        <Label v-for="flavor in product.flavor_profile" @click="handleSearch($event, flavor)">
-                            {{ flavor }}</Label>
+                        <LabelButton v-for="flavor in product.flavor_profile" :key="flavor"
+                            @click="handleSearch($event, flavor)">
+                            {{ flavor }}</LabelButton>
                     </ProductCardFlavors>
                     <ProductCardBody>
                         <ProductCardTitle :name="product.name" :weight="product.weight" />

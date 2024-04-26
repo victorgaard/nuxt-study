@@ -12,11 +12,11 @@
 <template>
     <div class="flex flex-col justify-between selection:bg-amber-600 bg-slate-950/95 text-white min-h-dvh overflow-clip">
         <div>
-            <Navbar />
+            <NavbarItems />
             <section class="px-8">
                 <slot />
             </section>
         </div>
-        <Footer />
+        <FooterTemplate />
     </div>
 </template>

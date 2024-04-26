@@ -71,7 +71,7 @@ async function addToCart() {
                     <div class="flex flex-col gap-1.5">
                         <p class="uppercase text-xs font-medium">flavor profile</p>
                         <div class="flex gap-2">
-                            <p v-for="(flavor) in flavor_profile"
+                            <p v-for="(flavor) in flavor_profile" :key="flavor"
                                 class="text-slate-300 text-sm rounded-lg bg-slate-800 px-2 py-0.5">{{
                                     flavor }}</p>
                         </div>
@@ -79,7 +79,7 @@ async function addToCart() {
                     <div class="flex flex-col gap-1.5">
                         <p class="uppercase text-xs font-medium">roast level</p>
                         <div class="flex items-center gap-2">
-                            <CoffeeBeanIcon v-for="(_, index) in Array.from(Array(5).keys())"
+                            <CoffeeBeanIcon v-for="(_, index) in Array.from(Array(5).keys())" :key="index"
                                 :class="{ 'fill-orange-800': index + 1 <= roast_level, 'fill-slate-700': index + 1 > roast_level }" />
                         </div>
                     </div>
@@ -87,14 +87,17 @@ async function addToCart() {
                 <div class="flex items-center gap-2">
                     <div
                         class="flex items-center gap-2 w-28 justify-between border border-slate-700 h-full rounded-lg overflow-clip">
-                        <button :disabled="quantity <= 1" @:click="quantity--"
-                            class="px-3.5 hover:bg-slate-700 h-full bg-slate-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all">-</button>
+                        <button :disabled="quantity <= 1"
+                            class="px-3.5 hover:bg-slate-700 h-full bg-slate-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                            @:click="quantity--">-</button>
                         <p>{{ quantity }}</p>
-                        <button @:click="quantity++"
-                            class="px-3.5 hover:bg-slate-700 h-full bg-slate-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all">+</button>
+                        <button
+                            class="px-3.5 hover:bg-slate-700 h-full bg-slate-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                            @:click="quantity++">+</button>
                     </div>
-                    <button :disabled="isAddingToCart" @:click="addToCart"
-                        class="flex-1 disabled:opacity-50 active:bg-amber-700 bg-amber-700 disabled:hover:bg-amber-700 disabled:cursor-not-allowed hover:bg-amber-800 transition-all flex items-center justify-center gap-2 text-white py-3 px-3.5 rounded-lg">
+                    <button :disabled="isAddingToCart"
+                        class="flex-1 disabled:opacity-50 active:bg-amber-700 bg-amber-700 disabled:hover:bg-amber-700 disabled:cursor-not-allowed hover:bg-amber-800 transition-all flex items-center justify-center gap-2 text-white py-3 px-3.5 rounded-lg"
+                        @:click="addToCart">
                         <LoadingSpinner v-if="isAddingToCart" />
                         <ShoppingCartIcon v-else class="h-5 w-5 opacity-50" />
                         Add to cart <span class="text-white opacity-50">•</span> {{ formatCurrency(price * quantity)
