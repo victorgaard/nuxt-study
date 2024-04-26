@@ -55,7 +55,7 @@ async function removeFromCart(productId: number) {
         <div v-if="cart.length === 0" class="text-slate-300">
           There are no products in the cart.
         </div>
-        <div v-else class="flex flex-col sm:min-w-[460px]">
+        <div v-else class="flex flex-col sm:min-w-[420px]">
           <div
             class="overflow-y-auto overflow-x-hidden max-h-[calc(100dvh-260px)] sm:max-h-[calc(100dvh-280px)] -mx-4 px-4"
           >
@@ -67,8 +67,8 @@ async function removeFromCart(productId: number) {
               <div class="flex items-center gap-4 sm:gap-6">
                 <NuxtImg
                   :src="item.image_url"
-                  :width="140"
-                  class="bg-slate-700/50 rounded-xl"
+                  :width="200"
+                  class="bg-slate-700/50 w-[140px] sm:w-[200px] rounded-xl"
                 />
                 <div class="flex flex-col gap-0.5 flex-wrap">
                   <p class="font-medium">
