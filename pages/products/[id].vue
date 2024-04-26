@@ -62,9 +62,9 @@ async function addToCart() {
   <div v-else-if="pending">Loading...</div>
 
   <div v-else class="flex justify-center">
-    <div class="grid md:grid-cols-2 gap-12 max-w-[1180px]">
+    <div class="grid md:grid-cols-2 gap-6 sm:gap-12 items-center max-w-[1180px]">
       <div
-        class="relative h-[600px] flex items-center justify-center overflow-clip rounded-2xl bg-gradient-to-b from-emerald-700 to-amber-800"
+        class="relative h-[300px] sm:h-[600px] flex items-center justify-center overflow-clip rounded-2xl bg-gradient-to-b from-emerald-700 to-amber-800"
       >
         <NuxtImg
           loading="lazy"
@@ -72,14 +72,14 @@ async function addToCart() {
           height="2000px"
           :src="image_url"
           :alt="`Background image for ${name}`"
-          class="absolute inset-0 -top-[90%] h-[2000px] object-cover mix-blend-soft-light opacity-30"
+          class="absolute inset-0 -top-[90%] h-[1400px] sm:h-[2000px] object-cover mix-blend-soft-light opacity-30"
         />
         <NuxtImg
           loading="lazy"
           :src="image_url"
           height="600px"
           :alt="`Product - ${name} - ${formatCurrency(price)}`"
-          class="z-10 h-[600px] object-cover scale-120"
+          class="z-10 h-[400px] sm:h-[600px] object-cover scale-120"
         />
       </div>
       <div class="flex flex-col gap-8 justify-between">
@@ -125,9 +125,9 @@ async function addToCart() {
             </div>
           </div>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-4 sm:gap-6">
           <div
-            class="flex items-center gap-2 w-28 justify-between border border-slate-700 h-full rounded-lg"
+            class="flex items-center gap-2 w-28 justify-between border border-slate-700 self-stretch rounded-lg"
           >
             <button
               :disabled="quantity <= 1"
@@ -151,8 +151,11 @@ async function addToCart() {
           >
             <LoadingSpinner v-if="isAddingToCart" class="h-5 w-5" />
             <ShoppingCartIcon v-else class="h-5 w-5 opacity-50" />
-            Add to cart <span class="text-white opacity-50">•</span>
-            {{ formatCurrency(price * quantity) }}
+            Add to cart
+            <p class="hidden sm:block">
+              <span class="text-white opacity-50">•</span>
+              {{ formatCurrency(price * quantity) }}
+            </p>
           </button>
         </div>
       </div>

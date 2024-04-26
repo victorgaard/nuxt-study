@@ -15,7 +15,7 @@ useSeoMeta({
   >
     <div>
       <NavbarItems />
-      <section class="px-8">
+      <section class="px-4 sm:px-8">
         <slot />
       </section>
     </div>
