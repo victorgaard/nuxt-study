@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { store } from '~/store/store';
 import useProduct from '~/services/useProduct';
 import { ShoppingCartIcon } from '@heroicons/vue/24/outline';
+import { currentProductStore } from '~/store/currentProduct';
+import { cartStore } from '~/store/cart';
 
 definePageMeta({
     validate: async (route) => {
@@ -11,7 +12,7 @@ definePageMeta({
 
 const { params } = useRoute()
 const { pending, error, refresh } = await useProduct({ id: params.id })
-const { id, name, description, weight, region, flavor_profile, price, roast_level, image_url } = store.currentProduct
+const { id, name, description, weight, region, flavor_profile, price, roast_level, image_url } = currentProductStore.currentProduct
 
 useSeoMeta({
     title: () => `${name} ${formatWeight(weight)} ${formatCurrency(price)}`,
@@ -23,6 +24,15 @@ useSeoMeta({
 })
 
 const quantity = ref(1)
+const isAddingToCart = ref(false)
+
+async function addToCart() {
+    isAddingToCart.value = true
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    cartStore.addToCart({ id, name, image_url, price, weight, quantity: quantity.value })
+    isAddingToCart.value = false
+}
+
 </script>
 
 <template>
@@ -83,11 +93,16 @@ const quantity = ref(1)
                         <button :disabled="quantity >= 9" @:click="quantity++"
                             class="px-3.5 hover:bg-slate-700 h-full bg-slate-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all">+</button>
                     </div>
-                    <button
-                        class="flex-1 bg-amber-700 hover:bg-amber-800 transition-all flex items-center justify-center gap-2 text-white py-3 px-3.5 rounded-lg">
-                        <ShoppingCartIcon class="h-5 w-5 opacity-50" /> Add
-                        to cart <span class="text-white opacity-50">•</span> {{ formatCurrency(price * quantity)
-                        }}
+                    <button :disabled="isAddingToCart" @:click="addToCart"
+                        class="flex-1 disabled:opacity-50 bg-amber-700 hover:bg-amber-800 transition-all flex items-center justify-center gap-2 text-white py-3 px-3.5 rounded-lg">
+                        <template v-if="isAddingToCart">
+                            Adding {{ quantity }} items to the cart
+                        </template>
+                        <template v-else>
+                            <ShoppingCartIcon class="h-5 w-5 opacity-50" /> Add
+                            to cart <span class="text-white opacity-50">•</span> {{ formatCurrency(price * quantity)
+                            }}
+                        </template>
                     </button>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { store } from "~/store/store";
+import { currentProductStore } from "~/store/currentProduct";
 import type { Product } from "~/types/global";
 
 type UseProduct = {
@@ -13,6 +13,6 @@ export default async function useProduct({ id }: UseProduct) {
 		refresh,
 	} = await useFetch<Product[]>(`https://fake-coffee-api.vercel.app/api/${id}`);
 	const newProduct = ref(product.value?.[0]);
-	store.updateCurrentProduct(newProduct.value);
+	currentProductStore.updateCurrentProduct(newProduct.value);
 	return { product, pending, error, refresh };
 }
