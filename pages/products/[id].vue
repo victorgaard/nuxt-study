@@ -90,7 +90,7 @@ async function addToCart() {
                         <button :disabled="quantity <= 1" @:click="quantity--"
                             class="px-3.5 hover:bg-slate-700 h-full bg-slate-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all">-</button>
                         <p>{{ quantity }}</p>
-                        <button :disabled="quantity >= 9" @:click="quantity++"
+                        <button @:click="quantity++"
                             class="px-3.5 hover:bg-slate-700 h-full bg-slate-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all">+</button>
                     </div>
                     <button :disabled="isAddingToCart" @:click="addToCart"

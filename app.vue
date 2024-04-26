@@ -6,10 +6,15 @@
 </template>
 
 <style>
+:root {
+  color-scheme: dark;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.125s;
 }
+
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
