@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     "radix-vue/nuxt",
   ],
   app: {
+    cdnURL: "./",
     head: {
       htmlAttrs: {
         lang: "en",
